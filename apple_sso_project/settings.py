@@ -3,11 +3,11 @@ import os
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = 'django-insecure-apple-sso-test-key-change-in-production'
+SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-apple-sso-test-key-change-in-production')
 
-DEBUG = True
+DEBUG = os.environ.get('DEBUG', 'True').lower() == 'true'
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['galaluddin12.pythonanywhere.com', 'localhost', '127.0.0.1']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -23,8 +23,8 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    'django.middleware.security.SecurityMiddleware',
     'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -81,37 +81,33 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# CORS settings
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "http://localhost:8001",
     "https://test.avitane.com",
+    "https://galaluddin12.pythonanywhere.com",
 ]
 CORS_ALLOW_CREDENTIALS = True
 
-# Authentication backends
 AUTHENTICATION_BACKENDS = [
     'social_core.backends.apple.AppleIdAuth',
     'django.contrib.auth.backends.ModelBackend',
 ]
 
-# Apple SSO Configuration
-SOCIAL_AUTH_APPLE_ID_CLIENT = 'your.client.id.here'  # Service ID from Apple
-SOCIAL_AUTH_APPLE_ID_TEAM = 'YOUR_TEAM_ID'  # Team ID from Apple Developer Account
-SOCIAL_AUTH_APPLE_ID_KEY = 'YOUR_KEY_ID'  # Key ID from Apple
-SOCIAL_AUTH_APPLE_ID_SECRET = '''-----BEGIN PRIVATE KEY-----
-YOUR_PRIVATE_KEY_HERE
------END PRIVATE KEY-----'''
+# Apple SSO Configuration - ALL FROM ENVIRONMENT VARIABLES
+SOCIAL_AUTH_APPLE_ID_CLIENT = os.environ.get('APPLE_CLIENT_ID')
+SOCIAL_AUTH_APPLE_ID_TEAM = os.environ.get('APPLE_TEAM_ID')
+SOCIAL_AUTH_APPLE_ID_KEY = os.environ.get('APPLE_KEY_ID')
+SOCIAL_AUTH_APPLE_ID_SECRET = os.environ.get('APPLE_PRIVATE_KEY')
 
 SOCIAL_AUTH_APPLE_ID_SCOPE = ['email', 'name']
 SOCIAL_AUTH_APPLE_ID_EMAIL_AS_USERNAME = True
+SOCIAL_AUTH_APPLE_ID_CALLBACK_URL = 'https://galaluddin12.pythonanywhere.com/social-auth/complete/apple-id/'
 
-# For local development with ngrok or staging
 SOCIAL_AUTH_REDIRECT_IS_HTTPS = True
 SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/'
 SOCIAL_AUTH_LOGIN_ERROR_URL = '/login-error/'
 
-# Pipeline configuration
 SOCIAL_AUTH_PIPELINE = (
     'social_core.pipeline.social_auth.social_details',
     'social_core.pipeline.social_auth.social_uid',
@@ -135,12 +131,5 @@ LOGGING = {
     'root': {
         'handlers': ['console'],
         'level': 'INFO',
-    },
-    'loggers': {
-        'social_core': {
-            'handlers': ['console'],
-            'level': 'DEBUG',
-            'propagate': False,
-        },
     },
 }
