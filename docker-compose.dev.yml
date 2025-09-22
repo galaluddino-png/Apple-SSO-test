@@ -10,26 +10,7 @@ services:
     container_name: apple-sso-app
     environment:
       - DEBUG=True
-      - DATABASE_URL=postgresql://applessouser:applessopass@db:5432/applesso_db
     command: >
       sh -c "python manage.py makemigrations &&
             python manage.py migrate --noinput &&
             python manage.py runserver 0.0.0.0:8000"
-    depends_on:
-      - db
-
-  db:
-    image: postgres:16
-    restart: always
-    ports:
-      - "5433:5432"
-    container_name: apple-sso-db
-    environment:
-      POSTGRES_DB: applesso_db
-      POSTGRES_USER: applessouser
-      POSTGRES_PASSWORD: applessopass
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-
-volumes:
-  postgres_data: {}
