@@ -17,7 +17,6 @@ def login_error(request):
         'error': request.GET.get('message', 'Unknown error')
     }, status=400)
 
-@login_required
 def welcome_view(request):
     user = request.user
     full_name = f"{user.first_name} {user.last_name}".strip()

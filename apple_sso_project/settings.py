@@ -121,7 +121,7 @@ SOCIAL_AUTH_APPLE_ID_EMAIL_AS_USERNAME = True
 SOCIAL_AUTH_APPLE_ID_CALLBACK_URL = 'https://galaluddin12.pythonanywhere.com/social-auth/complete/apple-id/'
 
 SOCIAL_AUTH_REDIRECT_IS_HTTPS = True
-SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/'
+SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/auth/welcome/'
 SOCIAL_AUTH_LOGIN_ERROR_URL = '/login-error/'
 
 SOCIAL_AUTH_PIPELINE = (
