@@ -62,33 +62,9 @@
     <div class="container">
         <h1>Apple SSO Test Page</h1>
 
-        <div class="info">
-            <h3>Test Apple Sign-In</h3>
-            <p>Click the button below to test Apple SSO authentication:</p>
-        </div>
-
         <a href="/social-auth/login/apple-id/" class="btn btn-apple">
             Sign in with Apple
         </a>
-
-        <div class="endpoints">
-            <h3>Available Endpoints:</h3>
-            <div class="endpoint">GET /social-auth/login/apple-id/ - Start Apple login</div>
-            <div class="endpoint">GET /social-auth/complete/apple-id/ - Apple callback</div>
-            <div class="endpoint">GET /auth/user/ - Get current user info</div>
-            <div class="endpoint">POST /auth/logout/ - Logout user</div>
-        </div>
-
-        <div class="info">
-            <h3>Configuration Required:</h3>
-            <ol>
-                <li>Update SOCIAL_AUTH_APPLE_ID_CLIENT in settings.py</li>
-                <li>Update SOCIAL_AUTH_APPLE_ID_TEAM in settings.py</li>
-                <li>Update SOCIAL_AUTH_APPLE_ID_KEY in settings.py</li>
-                <li>Add private key to SOCIAL_AUTH_APPLE_ID_SECRET</li>
-                <li>Configure redirect URL in Apple Developer Console</li>
-            </ol>
-        </div>
     </div>
 </body>
 </html>
