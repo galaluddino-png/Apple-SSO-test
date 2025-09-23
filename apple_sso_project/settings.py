@@ -31,6 +31,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'social_django.middleware.SocialAuthExceptionMiddleware',
 ]
 
 ROOT_URLCONF = 'apple_sso_project.urls'
@@ -84,10 +85,25 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "http://localhost:8001",
-    "https://test.avitane.com",
     "https://galaluddin12.pythonanywhere.com",
 ]
 CORS_ALLOW_CREDENTIALS = True
+
+
+SESSION_COOKIE_SAMESITE = 'None'
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SAMESITE = 'None'
+CSRF_COOKIE_SECURE = True
+
+if DEBUG:
+    SESSION_COOKIE_SAMESITE = 'Lax'
+    CSRF_COOKIE_SAMESITE = 'Lax'
+    SESSION_COOKIE_SECURE = False
+    CSRF_COOKIE_SECURE = False
+
+SOCIAL_AUTH_FIELDS_STORED_IN_SESSION = ['state']
+SOCIAL_AUTH_IGNORE_DUPLICATE_EMAILS = True
+
 
 AUTHENTICATION_BACKENDS = [
     'social_core.backends.apple.AppleIdAuth',
