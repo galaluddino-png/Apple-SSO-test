@@ -95,11 +95,6 @@ SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SAMESITE = 'None'
 CSRF_COOKIE_SECURE = True
 
-if DEBUG:
-    SESSION_COOKIE_SAMESITE = 'Lax'
-    CSRF_COOKIE_SAMESITE = 'Lax'
-    SESSION_COOKIE_SECURE = False
-    CSRF_COOKIE_SECURE = False
 
 SOCIAL_AUTH_FIELDS_STORED_IN_SESSION = ['state']
 SOCIAL_AUTH_IGNORE_DUPLICATE_EMAILS = True
@@ -121,8 +116,8 @@ SOCIAL_AUTH_APPLE_ID_EMAIL_AS_USERNAME = True
 SOCIAL_AUTH_APPLE_ID_CALLBACK_URL = 'https://galaluddin12.pythonanywhere.com/social-auth/complete/apple-id/'
 
 SOCIAL_AUTH_REDIRECT_IS_HTTPS = True
-SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/auth/welcome/'
-SOCIAL_AUTH_LOGIN_ERROR_URL = '/login-error/'
+SOCIAL_AUTH_LOGIN_REDIRECT_URL = 'auth/welcome/'
+SOCIAL_AUTH_LOGIN_ERROR_URL = 'auth/login-error/'
 
 SOCIAL_AUTH_PIPELINE = (
     'social_core.pipeline.social_auth.social_details',
